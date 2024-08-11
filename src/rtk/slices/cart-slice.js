@@ -10,21 +10,6 @@ const cartSlice = createSlice({
   name: "cartSlice",
   reducers: {
     addToCart: (state, action) => {
-      // action.payload.forEach((actionProduct) => {
-      //   const foundProduct = state.find(
-      //     (product) => product.id === actionProduct.id
-      //   );
-
-      // if (!foundProduct) {
-      //   if (actionProduct.quantity) {
-      //     const productClone = { ...actionProduct };
-      //     state.push(productClone);
-      //   } else {
-      //     const productClone = { ...actionProduct, quantity: 1 };
-      //     state.push(productClone);
-      //   }
-      // }
-      // });
       const foundProduct = state.find(
         (product) => product.id == action.payload.id
       );
@@ -35,7 +20,6 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cart", JSON.stringify(state));
     },
-    // create another reducer for increasing quantity
     increaseQuantityBy1: (state, action) => {
       const foundProduct = state.find(
         (product) => product.id == action.payload.id

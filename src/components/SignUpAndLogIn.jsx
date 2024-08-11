@@ -257,7 +257,7 @@ const SignUpAndLogIn = ({ isInLogIn }) => {
       <div className="grow hidden lg:block"></div>
       <img
         className="absolute h-[50vw] max-h-[600px] left-0 hidden lg:block"
-        src="../../imgs/Side Image.png"
+        src="./imgs/Side Image.png"
         alt=""
       />
       <div className="md:w-[371px]">
@@ -337,7 +337,7 @@ const SignUpAndLogIn = ({ isInLogIn }) => {
         {!isInLogIn && (
           <div className="foot">
             <div className="mb-9">
-              <img src="../../imgs/Google SIgn up.png" alt="" />
+              <img src="./imgs/Google SIgn up.png" alt="" />
             </div>
             <div className="flex items-center gap-3 justify-center text-[#4d4d4d]">
               <span className="hover:text-[rgb(10_10_10)] duration-300">

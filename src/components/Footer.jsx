@@ -1,4 +1,6 @@
-const Footer = () => {
+import PropTypes from "prop-types";
+
+const Footer = (isInProductsPage) => {
   return (
     <footer className="bg-black text-[#fafafa]">
       <div className="container flex justify-between py-[80px] flex-wrap gap-10">
@@ -19,7 +21,11 @@ const Footer = () => {
               />
               <img
                 className="absolute right-[1px] top-[calc(25%_-_3px)] bg-black pr-[10px] pl-5"
-                src="./imgs/icon-send.png"
+                src={
+                  isInProductsPage
+                    ? "../imgs/icon-send.png"
+                    : "./imgs/icon-send.png"
+                }
                 alt=""
               />
             </li>
@@ -79,34 +85,69 @@ const Footer = () => {
           <h6 className="text-[20px] font-semibold mb-5">Download App</h6>
           <div className="text-[#afafaf]">Save $3 with App New User Only</div>
           <div className="flex gap-1 mb-4 mt-2">
-            <img src="./imgs/Qr Code.png" alt="" />
+            <img
+              src={
+                isInProductsPage ? "../imgs/Qr Code.png" : "./imgs/Qr Code.png"
+              }
+              alt=""
+            />
             <div className="flex flex-col gap-1">
-              <img src="./imgs/GooglePlay.png" alt="" />
-              <img src="./imgs/AppStore.png" alt="" />
+              <img
+                src={
+                  isInProductsPage
+                    ? "../imgs/GooglePlay.png"
+                    : "./imgs/GooglePlay.png"
+                }
+                alt=""
+              />
+              <img
+                src={
+                  isInProductsPage
+                    ? "../imgs/AppStore.png"
+                    : "./imgs/AppStore.png"
+                }
+                alt=""
+              />
             </div>
           </div>
           <div className="flex gap-[13px]">
             <img
               className="hover:bg-[#1877f2] duration-300 rounded p-1"
-              src="./imgs/Icon-Facebook.png"
+              src={
+                isInProductsPage
+                  ? "../imgs/Icon-Facebook.png"
+                  : "./imgs/Icon-Facebook.png"
+              }
               alt=""
             />
             <img
               className="rounded hover:bg-[#1DA1F2] duration-300 p-1"
-              src="./imgs/Icon-Twitter.png"
+              src={
+                isInProductsPage
+                  ? "../imgs/Icon-Twitter.png"
+                  : "./imgs/Icon-Twitter.png"
+              }
               alt=""
             />
             <div className="z-10 group relative p-1">
               <div className="overlay rounded z-20 absolute w-full h-full top-0 left-0 opacity-0 bg-instagram-gradient duration-300 group-hover:opacity-100"></div>
               <img
                 className="z-30 relative"
-                src="./imgs/icon-instagram.png"
+                src={
+                  isInProductsPage
+                    ? "../imgs/icon-instagram.png"
+                    : "./imgs/icon-instagram.png"
+                }
                 alt=""
               />
             </div>
             <img
               className="rounded hover:bg-[#0077B5] duration-300 p-1"
-              src="./imgs/Icon-Linkedin.png"
+              src={
+                isInProductsPage
+                  ? "../imgs/Icon-Linkedin.png"
+                  : "./imgs/Icon-Linkedin.png"
+              }
               alt=""
             />
           </div>
@@ -120,5 +161,7 @@ const Footer = () => {
     </footer>
   );
 };
-
+Footer.propTypes = {
+  isInProductsPage: PropTypes.bool,
+};
 export default Footer;

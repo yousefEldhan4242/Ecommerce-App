@@ -40,6 +40,8 @@ const ProductCard = ({
     window.scrollTo({ top: 70 });
   };
 
+  // if the "showOnlyProductsWithSale" is "true" return the card with discount only
+  // if the "showOnlyProductsWithSale" is flasy value return any card
   if (showOnlyProductsWithSale) {
     if (product.discount) {
       return (

@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { Coupon, Total } from "./Pay";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
 import {
-  addToCart,
   decreaseQuantity,
   increaseQuantityBy1,
   updateCart,
@@ -13,10 +10,6 @@ import {
 const Cart = () => {
   const products = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
 
   return (
     <main className="container py-[80px]">
@@ -30,7 +23,7 @@ const Cart = () => {
       <section className="px-[15px]">
         <section className="overflow-x-auto max-h-[500px] p-5 flex flex-col gap-5">
           <div className="min-w-full bg-white flex flex-col gap-10">
-            <div className="flex items-center shadow-cartSahdow justify-between">
+            <div className="flex items-center shadow-cartSahdow justify-between w-fit md:w-full">
               <div className="text-left px-10 py-5">Product</div>
               <div className="text-left px-10 py-5">Price</div>
               <div className="text-center px-10 py-5">Quantity</div>
@@ -39,7 +32,7 @@ const Cart = () => {
             {products.map((item) => {
               return (
                 <div
-                  className="flex items-center shadow-cartSahdow justify-between"
+                  className="flex items-center shadow-cartSahdow justify-between w-fit md:w-full"
                   key={item.id}
                 >
                   <div className="px-10 py-5 flex items-center">

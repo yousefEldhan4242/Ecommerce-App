@@ -10,7 +10,14 @@ import ContactPage from "./pages/ContactPage";
 import ProductDetasilsPage from "./pages/ProductDetailsPage";
 import { Routes, Route } from "react-router";
 import LogInPage from "./pages/LogInPage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./rtk/slices/prodcutsSlice";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <>
       <Routes>

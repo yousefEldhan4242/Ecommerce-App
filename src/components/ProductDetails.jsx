@@ -3,13 +3,10 @@ import { useParams } from "react-router";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
 import {
   addToCart,
-  decreaseQuantity,
   increaseQuantityBy1,
   increaseQuantityBySpecificQunatity,
-  updateCart,
 } from "../rtk/slices/cart-slice";
 import { Link } from "react-router-dom";
 import { addToWhishList } from "../rtk/slices/whishList-slice";
@@ -20,10 +17,6 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const productsList = useSelector((state) => state.products);
   let chosenProduct = productsList.find((product) => productId == product.id);
-  const cartState = useSelector((state) => state.cart);
-  const myChosenProduct = cartState.find(
-    (product) => product.id == chosenProduct.id
-  );
   const whishListNotAddedIconRef = useRef();
   const whishListAddedIconRef = useRef();
 
@@ -40,21 +33,21 @@ const ProductDetails = () => {
       if (i < filledStars) {
         stars.push(
           <div key={i}>
-            <img src="../../imgs/starpng.png" key={i} />
+            <img src="../imgs/starpng.png" key={i} />
           </div>
         );
       } else if (i === filledStars && halfStar) {
         // Create Half Star
         stars.push(
           <div key={i} className="w-[18px] h-[17px]">
-            <img src="../../imgs/star-half-filled.png" key={i} />
+            <img src="../imgs/star-half-filled.png" key={i} />
           </div>
         );
       } else {
         // reate Empty Star
         stars.push(
           <div key={i}>
-            <img src="../../imgs/empty-star.png" key={i} />
+            <img src="../imgs/empty-star.png" key={i} />
           </div>
         );
       }
@@ -62,9 +55,6 @@ const ProductDetails = () => {
     return stars;
   };
 
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
   useEffect(() => {
     if (whishListState) {
       let productInWhishList = whishListState.find(
@@ -112,49 +102,49 @@ const ProductDetails = () => {
           <div className="flex flex-col gap-4">
             <div className="relative">
               <img
-                src={`../.${chosenProduct.image_1}`}
+                src={`.${chosenProduct.image_1}`}
                 className="absolute h-full w-full object-contain"
                 alt=""
               />
               <img
                 className="opacity-0 pointer-events-none"
-                src="../../imgs/products/white-controller-image2.png"
+                src="../imgs/products/white-controller-image2.png"
                 alt=""
               />
             </div>
             <div className="relative">
               <img
-                src={`../.${chosenProduct.image_2}`}
+                src={`.${chosenProduct.image_2}`}
                 className="absolute h-full w-full object-contain"
                 alt=""
               />
               <img
                 className="opacity-0 pointer-events-none"
-                src="../../imgs/products/white-controller-image5.png"
+                src="../imgs/products/white-controller-image5.png"
                 alt=""
               />
             </div>
             <div className="relative">
               <img
-                src={`../.${chosenProduct.image_3}`}
+                src={`.${chosenProduct.image_3}`}
                 className="absolute h-full w-full object-contain"
                 alt=""
               />
               <img
                 className="opacity-0 pointer-events-none"
-                src="../../imgs/products/white-controller-image4.png"
+                src="../imgs/products/white-controller-image4.png"
                 alt=""
               />
             </div>
             <div className="relative">
               <img
-                src={`../.${chosenProduct.image_4}`}
+                src={`.${chosenProduct.image_4}`}
                 className="absolute h-full w-full object-contain"
                 alt=""
               />
               <img
                 className="opacity-0 pointer-events-none"
-                src="../../imgs/products/white-controller-image3.png"
+                src="../imgs/products/white-controller-image3.png"
                 alt=""
               />
             </div>
@@ -162,13 +152,13 @@ const ProductDetails = () => {
           <div className=" flex relative items-start ">
             <div className="relative">
               <img
-                src={`../.${chosenProduct.main_image}`}
+                src={`.${chosenProduct.main_image}`}
                 className="absolute h-full w-full object-contain"
                 alt=""
               />
               <img
                 className="opacity-0 pointer-events-none"
-                src="../../imgs/products/white-controller-image1.png"
+                src="../imgs/products/white-controller-image1.png"
                 alt=""
               />
             </div>
@@ -253,7 +243,7 @@ const ProductDetails = () => {
                 setQuantity(1);
 
                 if (quantity > 1) {
-                  // add the product if it's not added as in the first time of adding it
+                  // add the product if it's not added
                   // then change product quantity with the quantity state value
                   dispatch(addToCart(chosenProduct));
                   dispatch(
@@ -310,7 +300,7 @@ const ProductDetails = () => {
           <div className="border border-border-color rounded mt-10 ">
             <div className="flex gap-4 items-center py-6 px-4">
               <div>
-                <img src="../../imgs/icon-delivery.png" alt="" />
+                <img src="../imgs/icon-delivery.png" alt="" />
               </div>
               <div>
                 <h6 className="text-[20px]">Free Delivery</h6>
@@ -322,7 +312,7 @@ const ProductDetails = () => {
             <hr className="border-border-color" />
             <div className="flex gap-4 items-center py-6 px-4">
               <div>
-                <img src="../../imgs/Icon-return.png" alt="" />
+                <img src="../imgs/Icon-return.png" alt="" />
               </div>
               <div>
                 <h6 className="text-[20px]">Return Delivery</h6>

@@ -2,12 +2,9 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import SectionTitle from "../components/SectionTitle";
 import SectionProducts from "../components/SectionProducts";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
+import { useSelector } from "react-redux";
 
 const WhishLishPage = () => {
-  const dispatch = useDispatch();
   let anotherProductsList = [...useSelector((state) => state.products)];
   const productsList = useSelector((state) => state.whishList);
 
@@ -21,9 +18,6 @@ const WhishLishPage = () => {
 
   anotherProductsList.length = 4;
 
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
   return (
     <>
       <NavBar isLoggedIn={true} />

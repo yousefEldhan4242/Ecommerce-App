@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SectionProducts from "./SectionProducts";
 import SectionTitle from "./SectionTitle";
-import { useEffect } from "react";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
 
 const OurProducts = () => {
-  const dispatch = useDispatch();
   let productsList = [...useSelector((state) => state.products)];
   let anotherProductsList = [...useSelector((state) => state.products)];
 
@@ -24,54 +21,6 @@ const OurProducts = () => {
 
   productsList.length = 4;
   anotherProductsList.length = 4;
-
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
-
-  // const products = [
-  //   {
-  //     id: 1,
-  //     title: "Kids Electric Car",
-  //     currentPrice: "960",
-  //     rating: 4.5,
-  //     availableItems: "65",
-  //     new: true,
-  //     image: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-  //     color: "#f91313",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Jr. Zoom Soccer Cleats",
-  //     currentPrice: "1160",
-  //     rating: 4.5,
-  //     availableItems: "35",
-  //     new: false,
-  //     image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-  //     color: "#eeff61",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "GP11 Shooter USB Gamepad",
-  //     currentPrice: "660",
-  //     rating: 4.5,
-  //     availableItems: "55",
-  //     new: true,
-  //     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-  //     color: "black",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Quilted Satin Jacket",
-  //     currentPrice: "660",
-  //     rating: 4.5,
-  //     availableItems: "55",
-  //     new: false,
-  //     image:
-  //       "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-  //     color: "#184a47",
-  //   },
-  // ];
 
   return (
     <>

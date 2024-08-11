@@ -21,7 +21,7 @@ const SectionProducts = ({
           productsList.map((item, index) => {
             return (
               <ProductCard
-                isInProductsPage={true}
+                isInProductsPage={isInProductsPage}
                 showOnlyProductsWithSale={showOnlyProductsWithSale}
                 cardWidth={cardWidth}
                 key={index}

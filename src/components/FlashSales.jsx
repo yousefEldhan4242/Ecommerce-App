@@ -1,11 +1,8 @@
 import SectionProducts from "./SectionProducts";
-import { useEffect } from "react";
 import SectionTitle from "./SectionTitle";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const FlashSales = () => {
-  const dispatch = useDispatch();
   const productsList = useSelector((state) => state.products);
   const products = [...productsList];
 
@@ -13,10 +10,6 @@ const FlashSales = () => {
     let j = Math.floor(Math.random() * (i + 1));
     [products[i], products[j]] = [products[j], products[i]];
   }
-
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
 
   return (
     <>

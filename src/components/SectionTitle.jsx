@@ -68,7 +68,10 @@ const SectionTitle = ({
 
   return (
     <>
-      <section className="flex justify-between pt-[100px]" ref={counterSection}>
+      <section
+        className="flex justify-between pt-[100px] flex-wrap gap-10"
+        ref={counterSection}
+      >
         <div className="flex items-center">
           {showSectionNameBlock && (
             <span className="h-[40px] w-[20px] rounded bg-main-color mr-4 inline-block"></span>
@@ -87,7 +90,9 @@ const SectionTitle = ({
             className="ml-auto"
             onClick={() => {
               if (whishList.length) {
-                dispatch(addToCart(whishList));
+                whishList.forEach((product) => {
+                  dispatch(addToCart(product));
+                });
                 dispatch(clearWhishList());
                 if (whishList.length == 1) {
                   Swal.fire({

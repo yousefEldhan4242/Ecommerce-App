@@ -1,10 +1,7 @@
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import PropTypes from "prop-types";
-// import { useSelector } from "react-redux";
 
 const Navigator = ({ photo = true }) => {
-  // const userSate = useSelector((state) => state.user);
-
   let flex;
   let width;
   if (photo == true) {

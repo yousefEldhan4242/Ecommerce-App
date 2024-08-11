@@ -4,12 +4,9 @@ import ProductDetails from "../components/ProductDetails";
 import PropTypes from "prop-types";
 import SectionTitle from "../components/SectionTitle";
 import SectionProducts from "../components/SectionProducts";
-import { useEffect } from "react";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ProductDetailsPage = () => {
-  const dispatch = useDispatch();
   let productsList = [...useSelector((state) => state.products)];
   let anotherProductsList = useSelector((state) => state.products);
 
@@ -19,10 +16,6 @@ const ProductDetailsPage = () => {
   }
 
   productsList.length = 4;
-
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
 
   return (
     <>
@@ -48,7 +41,7 @@ const ProductDetailsPage = () => {
           />
         )}
       </section>
-      <Footer />
+      <Footer isInProductsPage={true} />
     </>
   );
 };

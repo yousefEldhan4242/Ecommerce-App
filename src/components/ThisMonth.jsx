@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SectionProducts from "./SectionProducts";
 import SectionTitle from "./SectionTitle";
-import { useEffect } from "react";
-import { fetchProducts } from "../rtk/slices/prodcutsSlice";
 
 const ThisMonth = () => {
-  const dispatch = useDispatch();
   const productsList = [...useSelector((state) => state.products)];
 
   for (let i = productsList.length - 1; i > 0; i--) {
@@ -15,9 +12,6 @@ const ThisMonth = () => {
 
   productsList.length = 4;
 
-  useEffect(() => {
-    // dispatch(fetchProducts());
-  }, []);
   return (
     <>
       <section className="container flex flex-col gap-8">

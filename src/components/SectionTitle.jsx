@@ -17,6 +17,8 @@ const SectionTitle = ({
   sectionNameBtn,
   scrollLeft,
   scrollRight,
+  isInFlashSales,
+  handleViewAll,
 }) => {
   const dispatch = useDispatch();
   const whishList = useSelector((state) => state.whishList);
@@ -68,6 +70,9 @@ const SectionTitle = ({
     };
   }, []);
 
+  const viewAllRef = useRef();
+  const seeAllRef = useRef();
+
   return (
     <>
       <section
@@ -91,34 +96,48 @@ const SectionTitle = ({
           <div
             className="ml-auto"
             onClick={() => {
-              if (whishList.length) {
-                whishList.forEach((product) => {
-                  dispatch(addToCart(product));
-                });
-                dispatch(clearWhishList());
-                if (whishList.length == 1) {
-                  Swal.fire({
-                    title: `Good job!`,
-                    html: `You Have Sucessfully Moved <span class="text-green-600">${whishList.length}</span> Product From Favourites To Cart.`,
-                    icon: "success",
+              if (sectionNameBtn == "Move All To Bag") {
+                if (whishList.length) {
+                  whishList.forEach((product) => {
+                    dispatch(addToCart(product));
                   });
+                  dispatch(clearWhishList());
+                  if (whishList.length == 1) {
+                    Swal.fire({
+                      title: `Good job!`,
+                      html: `You Have Sucessfully Moved <span class="text-green-600">${whishList.length}</span> Product From Favourites To Cart.`,
+                      icon: "success",
+                    });
+                  } else {
+                    Swal.fire({
+                      title: `Good job!`,
+                      html: `You Have Sucessfully Moved <span class="text-green-600">${whishList.length}</span> Products From Favourites To Cart.`,
+                      icon: "success",
+                    });
+                  }
                 } else {
                   Swal.fire({
-                    title: `Good job!`,
-                    html: `You Have Sucessfully Moved <span class="text-green-600">${whishList.length}</span> Products From Favourites To Cart.`,
-                    icon: "success",
+                    title: `Add Products`,
+                    text: `Sorry You Can't Move Products To The Bag Please Add Products First`,
+                    icon: "info",
                   });
                 }
-              } else {
-                Swal.fire({
-                  title: `Add Products`,
-                  text: `Sorry You Can't Move Products To The Bag Please Add Products First`,
-                  icon: "info",
-                });
+              }
+
+              if (sectionNameBtn == "See All") {
+                handleViewAll();
+                if (seeAllRef.current.textContent == "See All") {
+                  seeAllRef.current.textContent = "See Less";
+                } else {
+                  seeAllRef.current.textContent = "See All";
+                }
               }
             }}
           >
-            <span className=" px-12 py-5 rounded border-[1px] cursor-pointer border-border-color hover:bg-secondary-hover-bg duration-300">
+            <span
+              ref={seeAllRef}
+              className=" px-12 py-5 rounded border-[1px] cursor-pointer border-border-color hover:bg-secondary-hover-bg duration-300"
+            >
               {sectionNameBtn}
             </span>
           </div>
@@ -181,13 +200,17 @@ const SectionTitle = ({
           <div className="flex gap-4 ml-auto">
             <img
               onClick={scrollLeft}
-              className="h-[46px] aspect-square cursor-pointer"
+              className={`h-[46px] aspect-square ${
+                isInFlashSales ? "cursor-pointer" : ""
+              }`}
               src="./imgs/Left Arrow.png"
               alt=""
             />
             <img
               onClick={scrollRight}
-              className="h-[46px] aspect-square cursor-pointer"
+              className={`h-[46px] aspect-square ${
+                isInFlashSales ? "cursor-pointer" : ""
+              }`}
               src="./imgs/Right Arrow.png"
               alt=""
             />
@@ -195,7 +218,18 @@ const SectionTitle = ({
         )}
         {showBtn && (
           <div className="ml-auto">
-            <span className="text-white px-12 py-5 rounded bg-main-color hover:bg-main-hover-bg duration-300">
+            <span
+              ref={viewAllRef}
+              className="text-white px-12 py-5 rounded bg-main-color hover:bg-main-hover-bg duration-300 cursor-pointer"
+              onClick={() => {
+                handleViewAll();
+                if (viewAllRef.current.textContent == "View All") {
+                  viewAllRef.current.textContent = "View Less";
+                } else {
+                  viewAllRef.current.textContent = "View All";
+                }
+              }}
+            >
               View All
             </span>
           </div>
@@ -217,6 +251,8 @@ SectionTitle.propTypes = {
   sectionNameBtn: PropTypes.string,
   scrollLeft: PropTypes.func,
   scrollRight: PropTypes.func,
+  isInFlashSales: PropTypes.bool,
+  handleViewAll: PropTypes.func,
 };
 
 export default SectionTitle;

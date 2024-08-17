@@ -1,26 +1,28 @@
 import { useSelector } from "react-redux";
 import SectionProducts from "./SectionProducts";
 import SectionTitle from "./SectionTitle";
+import { useRef, useState } from "react";
+
+let shuffle = (arr) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+};
 
 const OurProducts = () => {
-  let productsList = [...useSelector((state) => state.products)];
-  let anotherProductsList = [...useSelector((state) => state.products)];
+  const productsFromState = [...useSelector((state) => state.products)];
+  shuffle(productsFromState);
 
-  for (let i = productsList.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [productsList[i], productsList[j]] = [productsList[j], productsList[i]];
-  }
+  const selectedProducts = productsFromState.slice(0, 4);
 
-  for (let i = anotherProductsList.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [anotherProductsList[i], anotherProductsList[j]] = [
-      anotherProductsList[j],
-      anotherProductsList[i],
-    ];
-  }
+  const remainingProducts = productsFromState.slice(4);
 
-  productsList.length = 4;
-  anotherProductsList.length = 4;
+  const finalNormalProducts = useRef(selectedProducts);
+
+  const [finalColoredProducts, setFinalColoredProducts] = useState(
+    remainingProducts.slice(0, 4) // Take only 4 from the remaining products
+  );
 
   return (
     <>
@@ -33,7 +35,7 @@ const OurProducts = () => {
           sectionTitle={"Explore Our Products"}
         />
         <SectionProducts
-          productsList={productsList}
+          productsList={finalNormalProducts.current}
           cardWidth={false}
           showBtn={false}
           showDiscount={false}
@@ -44,7 +46,9 @@ const OurProducts = () => {
           }
         />
         <SectionProducts
-          productsList={anotherProductsList}
+          setFinalProducts={setFinalColoredProducts}
+          wholeProductsList={remainingProducts}
+          productsList={finalColoredProducts}
           cardWidth={false}
           showBtn={true}
           showBtns={true}

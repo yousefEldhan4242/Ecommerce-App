@@ -5,17 +5,34 @@ import PropTypes from "prop-types";
 import SectionTitle from "../components/SectionTitle";
 import SectionProducts from "../components/SectionProducts";
 import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+
+let shuffle = (arr) => {
+  let shuffledArr = [...arr];
+  for (let i = shuffledArr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [shuffledArr[i], shuffledArr[j]] = [shuffledArr[j], shuffledArr[i]];
+  }
+  return [...shuffledArr];
+};
 
 const ProductDetailsPage = () => {
-  let productsList = [...useSelector((state) => state.products)];
   let anotherProductsList = useSelector((state) => state.products);
 
-  for (let i = productsList.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [productsList[i], productsList[j]] = [productsList[j], productsList[i]];
-  }
+  const products = [...useSelector((state) => state.products)];
+  let shuffleProducts = useRef(shuffle(products));
 
-  productsList.length = 4;
+  let [productsList, setProductsList] = useState(
+    shuffleProducts.current.slice(0, 4)
+  );
+
+  const handleViewAll = () => {
+    if (productsList.length == 4) {
+      setProductsList(shuffleProducts.current);
+    } else {
+      setProductsList(shuffleProducts.current.slice(0, 4));
+    }
+  };
 
   return (
     <>
@@ -29,6 +46,9 @@ const ProductDetailsPage = () => {
 
         {productsList && (
           <SectionProducts
+            handleViewAll={handleViewAll}
+            setFinalProducts={setProductsList}
+            wholeProductsList={shuffleProducts.current}
             isInProductsPage={true}
             productsList={productsList}
             cardWidth={true}

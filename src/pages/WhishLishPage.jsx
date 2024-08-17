@@ -3,20 +3,33 @@ import Footer from "../components/Footer";
 import SectionTitle from "../components/SectionTitle";
 import SectionProducts from "../components/SectionProducts";
 import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+
+let shuffle = (arr) => {
+  let shuffledArr = [...arr];
+  for (let i = shuffledArr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [shuffledArr[i], shuffledArr[j]] = [shuffledArr[j], shuffledArr[i]];
+  }
+  return [...shuffledArr];
+};
 
 const WhishLishPage = () => {
-  let anotherProductsList = [...useSelector((state) => state.products)];
-  const productsList = useSelector((state) => state.whishList);
+  const whishListProducts = useSelector((state) => state.whishList);
+  const products = [...useSelector((state) => state.products)];
+  let shuffleProducts = useRef(shuffle(products));
 
-  for (let i = anotherProductsList.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [anotherProductsList[i], anotherProductsList[j]] = [
-      anotherProductsList[j],
-      anotherProductsList[i],
-    ];
-  }
+  let [productsList, setProductsList] = useState(
+    shuffleProducts.current.slice(0, 4)
+  );
 
-  anotherProductsList.length = 4;
+  const handleViewAll = () => {
+    if (productsList.length == 4) {
+      setProductsList(shuffleProducts.current);
+    } else {
+      setProductsList(shuffleProducts.current.slice(0, 4));
+    }
+  };
 
   return (
     <>
@@ -26,11 +39,11 @@ const WhishLishPage = () => {
           showSectionNameBtn={true}
           sectionNameBtn={"Move All To Bag"}
           showSectionNameBlock={false}
-          sectionName={`Wishlist (${productsList.length})`}
+          sectionName={`Wishlist (${whishListProducts.length})`}
           isInWhishList={true}
         />
         <SectionProducts
-          productsList={productsList}
+          productsList={whishListProducts}
           cardWidth={true}
           parentStyles={"flex overflow-auto gap-8"}
           isInWhishList={true}
@@ -39,11 +52,12 @@ const WhishLishPage = () => {
         <SectionTitle
           sectionName={"Just For You"}
           showSectionNameBtn={true}
+          handleViewAll={handleViewAll}
           sectionNameBtn={"See All"}
           isInWhishList={true}
         />
         <SectionProducts
-          productsList={anotherProductsList}
+          productsList={productsList}
           cardWidth={true}
           parentStyles={
             "grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-8"

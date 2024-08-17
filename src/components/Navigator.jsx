@@ -54,16 +54,9 @@ const Navigator = ({ photo = true }) => {
           <li>
             <KeyboardArrowRightOutlinedIcon className="cursor-pointer" />
           </li>
-          {/* <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li> */}
         </ul>
       </div>
-      <div className="image pt-10 w-[78%] flex items-center w-full md:w-fit">
+      <div className="image pt-10 flex items-center w-full md:w-fit">
         <img className="w-full" src="./../../imgs/homepng.png" alt="" />
       </div>
     </section>

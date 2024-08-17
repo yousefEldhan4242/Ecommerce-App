@@ -15,6 +15,8 @@ const SectionTitle = ({
   showSectionNameBlock = true,
   isInWhishList,
   sectionNameBtn,
+  scrollLeft,
+  scrollRight,
 }) => {
   const dispatch = useDispatch();
   const whishList = useSelector((state) => state.whishList);
@@ -178,12 +180,14 @@ const SectionTitle = ({
         {showArrows && (
           <div className="flex gap-4 ml-auto">
             <img
-              className="h-[46px] aspect-square"
+              onClick={scrollLeft}
+              className="h-[46px] aspect-square cursor-pointer"
               src="./imgs/Left Arrow.png"
               alt=""
             />
             <img
-              className="h-[46px] aspect-square"
+              onClick={scrollRight}
+              className="h-[46px] aspect-square cursor-pointer"
               src="./imgs/Right Arrow.png"
               alt=""
             />
@@ -211,6 +215,8 @@ SectionTitle.propTypes = {
   showSectionNameBlock: PropTypes.bool,
   isInWhishList: PropTypes.bool,
   sectionNameBtn: PropTypes.string,
+  scrollLeft: PropTypes.func,
+  scrollRight: PropTypes.func,
 };
 
 export default SectionTitle;

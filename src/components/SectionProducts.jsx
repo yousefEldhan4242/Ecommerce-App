@@ -13,10 +13,11 @@ const SectionProducts = ({
   isInWhishList,
   showOnlyProductsWithSale,
   isInProductsPage,
+  scrollRef,
 }) => {
   return (
     <>
-      <section className={parentStyles}>
+      <section className={`${parentStyles}`} ref={scrollRef}>
         {productsList &&
           productsList.map((item, index) => {
             return (
@@ -58,6 +59,7 @@ SectionProducts.propTypes = {
   isInWhishList: PropTypes.bool,
   showOnlyProductsWithSale: PropTypes.bool,
   isInProductsPage: PropTypes.bool,
+  scrollRef: PropTypes.object,
 };
 
 export default SectionProducts;

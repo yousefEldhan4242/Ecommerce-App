@@ -1,6 +1,7 @@
 import SectionProducts from "./SectionProducts";
 import SectionTitle from "./SectionTitle";
 import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 const FlashSales = () => {
   const productsList = useSelector((state) => state.products);
@@ -11,6 +12,16 @@ const FlashSales = () => {
     [products[i], products[j]] = [products[j], products[i]];
   }
 
+  const scrollRef = useRef();
+
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -275, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 275, behavior: "smooth" });
+  };
+
   return (
     <>
       <section className="container flex flex-col gap-8">
@@ -20,9 +31,12 @@ const FlashSales = () => {
           showArrows={true}
           showBtn={false}
           showCounter={true}
+          scrollLeft={scrollLeft}
+          scrollRight={scrollRight}
         />
 
         <SectionProducts
+          scrollRef={scrollRef}
           showOnlyProductsWithSale={true}
           productsList={products}
           cardWidth={true}

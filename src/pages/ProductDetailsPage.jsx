@@ -47,8 +47,6 @@ const ProductDetailsPage = () => {
         {productsList && (
           <SectionProducts
             handleViewAll={handleViewAll}
-            setFinalProducts={setProductsList}
-            wholeProductsList={shuffleProducts.current}
             isInProductsPage={true}
             productsList={productsList}
             cardWidth={true}

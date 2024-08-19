@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 
-const CategoryCard = ({ name, icon, title }) => {
+const CategoryCard = ({ index, currentIndex, name, icon, title }) => {
   return (
     <div
-      className={`flex flex-col gap-4 items-center justify-center p-5 border hover:bg-main-color hover:text-white group rounded duration-300`}
+      className={`flex flex-col gap-4 items-center justify-center p-5 border ${
+        currentIndex == index
+          ? "bg-main-color text-white"
+          : "hover:bg-main-color hover:text-white"
+      } group rounded duration-300`}
     >
       <div className={`text-3xl`}>{icon}</div>
 
@@ -22,9 +26,11 @@ CategoryCard.propTypes = {
   name: PropTypes.string,
   icon: PropTypes.element,
   title: PropTypes.string,
+  currentIndex: PropTypes.number,
+  index: PropTypes.number,
 };
 
-const ShowCategories = ({ categories }) => {
+const ShowCategories = ({ currentIndex, categories }) => {
   return (
     <section
       className={`grid ${
@@ -33,8 +39,13 @@ const ShowCategories = ({ categories }) => {
           : "grid-cols-[repeat(auto-fill,minmax(150px,1fr))]"
       }  gap-8`}
     >
-      {categories.map((category) => (
-        <CategoryCard key={category.name} {...category} />
+      {categories.map((category, index) => (
+        <CategoryCard
+          index={index}
+          currentIndex={currentIndex}
+          key={category.name}
+          {...category}
+        />
       ))}
     </section>
   );
@@ -42,5 +53,6 @@ const ShowCategories = ({ categories }) => {
 
 ShowCategories.propTypes = {
   categories: PropTypes.array,
+  currentIndex: PropTypes.number,
 };
 export default ShowCategories;

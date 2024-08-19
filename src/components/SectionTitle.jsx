@@ -17,8 +17,9 @@ const SectionTitle = ({
   sectionNameBtn,
   scrollLeft,
   scrollRight,
-  isInFlashSales,
   handleViewAll,
+  handleRightArrow,
+  handleLeftArrow,
 }) => {
   const dispatch = useDispatch();
   const whishList = useSelector((state) => state.whishList);
@@ -199,18 +200,28 @@ const SectionTitle = ({
         {showArrows && (
           <div className="flex gap-4 ml-auto">
             <img
-              onClick={scrollLeft}
-              className={`h-[46px] aspect-square ${
-                isInFlashSales ? "cursor-pointer" : ""
-              }`}
+              onClick={() => {
+                if (scrollLeft) {
+                  scrollLeft();
+                }
+                if (handleLeftArrow) {
+                  handleLeftArrow();
+                }
+              }}
+              className={`h-[46px] aspect-square cursor-pointer `}
               src="./imgs/Left Arrow.png"
               alt=""
             />
             <img
-              onClick={scrollRight}
-              className={`h-[46px] aspect-square ${
-                isInFlashSales ? "cursor-pointer" : ""
-              }`}
+              onClick={() => {
+                if (scrollRight) {
+                  scrollRight();
+                }
+                if (handleRightArrow) {
+                  handleRightArrow();
+                }
+              }}
+              className={`h-[46px] aspect-square cursor-pointer`}
               src="./imgs/Right Arrow.png"
               alt=""
             />
@@ -251,8 +262,9 @@ SectionTitle.propTypes = {
   sectionNameBtn: PropTypes.string,
   scrollLeft: PropTypes.func,
   scrollRight: PropTypes.func,
-  isInFlashSales: PropTypes.bool,
   handleViewAll: PropTypes.func,
+  handleRightArrow: PropTypes.func,
+  handleLeftArrow: PropTypes.func,
 };
 
 export default SectionTitle;
